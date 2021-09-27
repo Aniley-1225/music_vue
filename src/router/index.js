@@ -19,7 +19,45 @@ const routes = [
       {
         path: '/music',
         name: 'music',
-        component: () => import('@/views/music')
+        component: () => import('@/views/music'),
+        redirect: '/iLike',
+        children: [
+          {
+            path: '/iLike',
+            name: 'iLike',
+            component: () => import('@/views/music/third/iLike')
+          },
+          {
+            path: '/iBought',
+            name: 'iBought',
+            component: () => import('@/views/music/third/iBought')
+          },
+          {
+            path: '/myList',
+            name: 'myList',
+            component: () => import('@/views/music/third/myList')
+          },
+          {
+            path: '/follow',
+            name: 'follow',
+            component: () => import('@/views/music/third/follow')
+          },
+          {
+            path: '/follower',
+            name: 'follower',
+            component: () => import('@/views/music/third/follower')
+          },
+          {
+            path: '/myVideo',
+            name: 'myVideo',
+            component: () => import('@/views/music/third/myVideo')
+          },
+          {
+            path: '/myRadio',
+            name: 'myRadio',
+            component: () => import('@/views/music/third/myRadio')
+          }
+        ]
       },
       {
         path: '/my',

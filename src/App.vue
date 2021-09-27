@@ -21,5 +21,9 @@ html {
 }
 a {
   text-decoration: none;
+  color: #000;
+}
+li {
+  list-style: none;
 }
 </style>

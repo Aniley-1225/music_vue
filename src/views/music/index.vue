@@ -1,20 +1,47 @@
 <template>
   <div>
-    music
+    <transition name="transitionComponent">
+      <component :is="currentView"></component>
+    </transition>
   </div>
 </template>
 
 <script>
+import rotate from '@/components/rotate'
+import myMusic from '@/views/music/myMusic'
 export default {
   name: '',
   data () {
-    return {}
+    return {
+      currentView: rotate
+    }
   },
-  methods: {},
+  components: {
+    rotate,
+    myMusic
+  },
+  methods: {
+    loadingFalse () {
+      setTimeout(() => {
+        this.currentView = myMusic
+      }, 2000)
+    }
+  },
   computed: {},
   watch: {},
   created () {},
-  mounted () {}
+  mounted () {
+    this.loadingFalse()
+  }
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.transitionComponent-enter-active,
+.transitionComponent-leave-active {
+  transition: opacity 0.5s;
+}
+.transitionComponent-enter,
+.transitionComponent-leave-to {
+  opacity: 0;
+}
+</style>

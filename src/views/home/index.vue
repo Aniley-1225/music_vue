@@ -1,6 +1,7 @@
 <template>
   <div class="home-container">
     <el-container>
+      <!-- header -->
       <el-header>
         <el-menu
           :default-active="activeIndex"
@@ -38,7 +39,7 @@
           </el-menu-item>
           <el-menu-item>
             <i class="el-icon-mouse"></i>
-            <a href="https://y.qq.com/?ADTAG=myqq#type=index" target="_blank">
+            <a href="https://y.qq.com/" target="_blank">
               来点音乐bro
             </a>
           </el-menu-item>
@@ -61,9 +62,16 @@
           </div>
         </div>
       </el-header>
+      <!-- main -->
       <el-main>
         <router-view></router-view>
       </el-main>
+      <!-- footer -->
+      <el-footer>
+        <div class="footer-info">
+          什么都没有所以不知道footer写什么 就先这样吧
+        </div>
+      </el-footer>
     </el-container>
   </div>
 </template>
@@ -74,8 +82,8 @@ export default {
   name: '',
   data () {
     return {
-      user: { id: localStorage.getItem('userId') },
-      activeIndex: '/welcome',
+      user: { id: sessionStorage.getItem('userId') },
+      activeIndex: sessionStorage.getItem('activeIndex') || '/welcome',
       userInfo: {}
     }
   },
@@ -83,9 +91,11 @@ export default {
     async getUserInfo () {
       const { data: res } = await getUserInfo(this.user)
       this.userInfo = res.data
+      this.$store.commit('getUserInfo', res.data)
     },
-    handleSelect (key, keyPath) {
-      console.log(key, keyPath)
+    handleSelect (key) {
+      this.activeIndex = key
+      sessionStorage.setItem('activeIndex', key)
     },
     getAvatarText () {
       if (this.userInfo.nickname !== 'null') {
@@ -94,14 +104,15 @@ export default {
       return this.userInfo?.username.substring(0, 1)
     },
     logout () {
-      this.$confirm('您确认退出登录吗?', '提示', {
-        confirmButtonText: '确定',
+      this.$confirm('您确认退出登录吗?', '这是退出哦~', {
+        confirmButtonText: '搞快点',
         cancelButtonText: '取消',
         type: 'warning',
         callback: action => {
           if (action === 'confirm') {
             sessionStorage.removeItem('tokenKey')
             sessionStorage.removeItem('userId')
+            sessionStorage.removeItem('activeIndex')
             this.$router.push('/login')
           }
         }
@@ -121,6 +132,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.el-main {
+  padding: 0;
+}
 .infoBox {
   position: absolute;
   top: 5px;
@@ -164,6 +178,18 @@ export default {
       font-size: 30px;
       cursor: pointer;
     }
+  }
+}
+footer {
+  color: #999;
+  background-color: #333;
+  height: 300px !important;
+  margin-top: 20px;
+  .footer-info {
+    width: 1200px;
+    height: 100%;
+    line-height: 300px;
+    text-align: center;
   }
 }
 </style>

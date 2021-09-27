@@ -6,6 +6,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/fonts/iconfont.css'
 
+// 登录粒子特效
 import VueParticles from 'vue-particles'
 
 Vue.use(ElementUI)
