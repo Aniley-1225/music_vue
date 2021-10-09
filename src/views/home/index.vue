@@ -82,14 +82,13 @@ export default {
   name: '',
   data () {
     return {
-      user: { id: sessionStorage.getItem('userId') },
       activeIndex: sessionStorage.getItem('activeIndex') || '/welcome',
       userInfo: {}
     }
   },
   methods: {
     async getUserInfo () {
-      const { data: res } = await getUserInfo(this.user)
+      const { data: res } = await getUserInfo()
       this.userInfo = res.data
       this.$store.commit('getUserInfo', res.data)
     },
@@ -111,7 +110,6 @@ export default {
         callback: action => {
           if (action === 'confirm') {
             sessionStorage.removeItem('tokenKey')
-            sessionStorage.removeItem('userId')
             sessionStorage.removeItem('activeIndex')
             this.$router.push('/login')
           }
@@ -157,6 +155,7 @@ export default {
       cursor: pointer;
     }
     .pic {
+      display: inline-block;
       width: 45px;
       height: 45px;
       line-height: 45px;

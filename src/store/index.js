@@ -8,7 +8,15 @@ export default new Vuex.Store({
   state: {
     user: sessionStorage.getItem('tokenKey'),
     userId: sessionStorage.getItem('userId'),
-    userInfo: {}
+    userInfo: {
+      email: 'null',
+      follow: 0,
+      follower: 0,
+      id: 0,
+      nickname: 'null',
+      user_pic: 'null',
+      username: 'null'
+    }
   },
   mutations: {
     setUser (state, data) {
@@ -19,6 +27,7 @@ export default new Vuex.Store({
     },
     getUserInfo (state, data) {
       state.userInfo = data
+      setItem('userInfo', data)
     }
   },
   actions: {},

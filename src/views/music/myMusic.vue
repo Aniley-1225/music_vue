@@ -141,6 +141,8 @@ export default {
       img {
         width: 100%;
         height: 100%;
+        overflow: hidden;
+        border-radius: 50%;
       }
       .text {
         width: 100%;
@@ -209,6 +211,9 @@ export default {
         .active {
           color: slateblue;
         }
+      }
+      li a:hover {
+        color: slateblue;
       }
     }
   }

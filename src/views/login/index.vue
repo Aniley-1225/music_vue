@@ -177,7 +177,7 @@ export default {
 }
 #particles-js {
   width: 100%;
-  height: calc(100% - 100px);
+  height: 100%;
   position: absolute;
 }
 </style>
